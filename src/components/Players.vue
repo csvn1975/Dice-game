@@ -3,7 +3,7 @@
     <div v-bind:class="classPlayerPanel(0)" >
         <div class="player-name"> {{getPlayerName(0)}}</div>
         <div class="player-score">{{scores[0]}}</div>
-        <div class="player-current-box">
+        <div class="player-current-box" :style="{backgroundColor: bg_color}">
             <div class="player-current-label">Current</div>
             <div class="player-current-score"> {{(activePlayer==0) ? currentScore : 0}} </div>
         </div>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { eventBus } from '../main';
 export default {
 
     name: 'players',
@@ -33,6 +34,7 @@ export default {
 
     data(){
         return{
+           bg_color:"#42B982",
         }
     },
 
@@ -48,8 +50,14 @@ export default {
          getPlayerName(player){
             let {isWin, activePlayer} = this;
             return  (isWin && activePlayer == player) ? "Winner" : `Player ${player +1}`
-        }
+        },
     },
+
+    created() {
+            eventBus.$on('changeColor', (color) => {
+                this.bg_color = color;
+            })
+        },
 
     computed:{
         

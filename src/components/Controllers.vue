@@ -1,53 +1,65 @@
 <template>
   <div class="box-controller">
+       
+       <!-- use this.$emit  -->
        <button class="control btn-new"
         @click="gameStart"
        ><i class="ion-ios-plus-outline"></i>New game</button>
+       
+       <!-- change Color with EventBus -->
+       <!-- <button class="control"
+        @click="changeColor2"
+       ><i class="ion-ios-plus-outline"></i>change_Color</button> -->
 
-       <button class="control btn-roll" v-on:click="handleRollDice">
+        <!-- props function/ callback -->
+       <button class="control btn-roll" 
+               @click="handleRollDice()">
          <i class="ion-ios-loop"></i>Roll dice</button>
 
+       <!-- here use callback function, handleHoldFn is parent-handler -->
        <button class="control btn-hold" 
-              v-on:click="handleHold"
+              @click="handleHold()" 
               :class="{winanble:winable}">
-       <i class="ion-ios-download-outline"></i>Hold</button> 
+       <i class="ion-ios-download-outline"></i>Hold-cb</button> 
 
-       <input type="number" 
-        v-bind:value = "finalScore"
-        v-on:change="changScore"
-        placeholder="Final score" class="final-score">    
+       <input type="number" ref="score"
+            class="final-score"    
+            :value = "finalScore"
+            @change="changeScore"
+           > 
   </div>
 </template>
 
 <script>
+import {eventBus} from '../main.js'
 export default {
     
     name: 'controllers', 
-
     props:{
         finalScore: [Number, String],
         winable:Boolean,
-        //handleHold: Function,
+        handleHold: Function,
+        handleRollDice: Function,
     },
 
     methods:{
-
         gameStart: function(){
            this.$emit('newGame');
         },
 
-        handleRollDice: function(){
-            this.$emit("handleRollDice");
-        }, 
-
-        handleHold: function(){
-           this.$emit('handleHold')
-        }, 
-
-        changScore(event){
+        changeScore(event){
             let data = event.target.value;
-            this.$emit('changScore', data)
+            this.$emit('changeScore', data)
         },
+
+        /* eventBus */    
+        changeColor() {
+            eventBus.$emit('changeColor', 'red');
+        },
+        /* or */
+        changeColor2() {
+            eventBus.changeColor('red');
+        }
 
     }
 }

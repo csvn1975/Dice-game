@@ -12,9 +12,10 @@
         :finalScore="finalScore"
         v-bind:winable="winable"
         @newGame="newGame"
-        @handleRollDice="handleRollDice"
-        @handleHold="handleHold"
-        @changScore="changScore"
+        @changeScore="changeScore"
+
+        :handleRollDice="handleRollDice"
+        :handleHold="handleHold" 
       />
 
       <dices v-bind:dices="dices" />
@@ -37,6 +38,7 @@ export default {
   name: "app",
 
   data: function () {
+
     return {
       msg: "Welcome to Your Vue.js App",
       isPlaying: false,
@@ -80,6 +82,7 @@ export default {
         alert("Please click NewGame");
         return;
       }
+
       let {activePlayer} = this;
       let newDices = [... this.dices]
         newDices[0] = this.diceRandom();
@@ -110,7 +113,8 @@ export default {
       }
     },
 
-    changScore(data){
+    changeScore(data) {
+      
       this.finalScore = parseInt(data)
     },
 
