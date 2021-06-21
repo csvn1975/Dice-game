@@ -54,10 +54,10 @@ export default {
     },
 
     created() {
-            eventBus.$on('changeColor', (color) => {
-                this.bg_color = color;
-            })
-        },
+        eventBus.$on('changeColor', (color) => {
+            this.bg_color = color;
+        })
+    },
 
     computed:{
         

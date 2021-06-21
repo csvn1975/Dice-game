@@ -1,12 +1,16 @@
 import Vue from 'vue'
 import App from './App.vue'
 export const eventBus = new Vue({
+  data:{
+   
+  },
+
   methods:{
-    changeColor(color){
-      console.log("changeColor")
+    setColor(color){
       this.$emit("changeColor", color)
-    }
+    }, 
   }
+
 })
 
 new Vue({

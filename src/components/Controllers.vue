@@ -7,7 +7,7 @@
        ><i class="ion-ios-plus-outline"></i>New game</button>
        
        <!-- change Color with EventBus -->
-       <!-- <button class="control"
+      <!--  <button class="control"
         @click="changeColor2"
        ><i class="ion-ios-plus-outline"></i>change_Color</button> -->
 
@@ -58,7 +58,7 @@ export default {
         },
         /* or */
         changeColor2() {
-            eventBus.changeColor('red');
+            eventBus.setColor('red');
         }
 
     }
